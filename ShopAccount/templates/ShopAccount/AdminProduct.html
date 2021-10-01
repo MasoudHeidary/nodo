@@ -1,0 +1,123 @@
+{% extends 'ShopAccount/AdminBase.html' %}
+
+{% block Body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">محصولات فعلی فروشگاه</h3>
+
+                    <div class="card-tools">
+                        <form>
+                            <div class="input-group input-group-sm" style="width: 400px;">
+                                <input type="text" name="search" class="form-control float-right"
+                                       placeholder="در جستجو از اعداد استفاده نکنید" value="{{ request.GET.search }}">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0" style="height: 100%;">
+                    <table class="table table-head-fixed text-nowrap">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>آیدی</th>
+                            <th>ناشر</th>
+                            <th>بارکد</th>
+                            <th>نام</th>
+                            <th>نویسنده</th>
+                            <th>مترجم</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                {% if object.Active %}
+                                    <td><a href="{% url 'ShopAdmin:AddSubProduct' object.id %}">+</a></td>
+                                {% else %}
+                                    <td><a href="{% url 'ShopAdmin:AddSubProduct' object.id %}">***</a></td>
+                                {% endif %}
+                                <td>{{ object.id }}</td>
+                                <td>{{ object.Publisher }}</td>
+                                <td>{{ object.Barcode }}</td>
+                                <td>{{ object.Name }}</td>
+                                <td>{{ object.Writer }}</td>
+                                <td>{{ object.Translator }}</td>
+                            </tr>
+
+                            {% for sub_product in object.subproduct_set.all %}
+                                {% if sub_product.ToShop == request.user.ToShopAccount %}
+                                    <tr class="bg-gray-light">
+                                        <td></td>
+                                        <td><a href="#">---></a></td>
+                                        <td>{{ sub_product.id }}</td>
+                                        <td>
+                                            {% if sub_product.IsSecondHand %}
+                                                دست دوم
+                                                {{ sub_product.SecondHandRate }}
+                                            {% else %}
+                                                نو
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            قیمت
+                                            {{ sub_product.Price }}
+                                        </td>
+                                        <td>
+                                            تعداد
+                                            {{ sub_product.Number }}
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            <li class="page-item">
+                <a class="page-link" href="#">
+                    {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+                </a>
+            </li>
+
+
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+{% endblock %}

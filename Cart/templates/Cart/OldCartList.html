@@ -1,0 +1,42 @@
+{% extends 'Root/__base__.html' %}
+
+{% block BodyParam %}
+    class="animsition"
+{% endblock %}
+
+{% block Body %}
+    <div class="container rtl py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p class="mtext-101 text-center py-5">این صفحه در حال تکمیل است</p>
+
+                <table class="table-shopping-cart">
+                    <tr class="table_head">
+                        <th class="">کد سفارش</th>
+                        <th class="">تاریخ</th>
+                        <th class="">ارزش</th>
+                        <th class=""></th>
+                    </tr>
+
+                    {% for cart in object_list %}
+                        <tr class="table_row">
+                            <td>{{ cart.id }}</td>
+
+                            <td>{{ cart.template_date_time }}</td>
+
+                            <td>{{ cart.template_total }}</td>
+
+                            <td>
+                                <a href="{% url 'Cart:OldCartDetail' cart.id %}">
+                                    جزئیات سفارس
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'Root/__base__.html' %}
+
+{% block BodyParam %}
+    class="animsition"
+{% endblock %}
+
+{% block Body %}
+    <div class="container rtl py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+
+                <div class="wrap-table-shopping-cart">
+                    <table class="table-shopping-cart">
+                        <tr class="table_head">
+                            <th class="column-1">محصول</th>
+                            <th class="column-2"></th>
+                            <th class="column-3">قیمت</th>
+                            <th class="column-4">تعداد</th>
+                            <th class="column-5">کل</th>
+                        </tr>
+
+                        {% for cart_item in object.cartitems_set.all %}
+                            <tr class="table_row">
+                                <td class="column-1">
+                                    <div class="how-itemcart1">
+                                        <img src="{{ cart_item.ToSubProduct.ToProduct.Image.url }}" alt="IMG">
+                                    </div>
+                                </td>
+                                <td class="column-2">{{ cart_item.ToSubProduct.ToProduct.Publisher }},
+                                    {{ cart_item.ToSubProduct.ToProduct.Name }},
+                                    {% if cart_item.ToSubProduct.IsSecondHand %}
+                                        دست دوم {{ cart_item.ToSubProduct.SecondHandRate }}
+                                    {% else %}
+                                        نو
+                                    {% endif %}
+                                </td>
+                                <td class="column-3">{{ cart_item.Price }}</td>
+                                <td class="column-4">
+                                    {{ cart_item.Count }}
+                                    عدد
+                                </td>
+                                <td class="column-5">{{ cart_item.template_item_price }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        <tr class="table_row">
+                            <td class="column-1">
+                                {{ object.shippingaddress.State }} - {{ object.shippingaddress.City }}
+                            </td>
+                            <td class="column-2">
+                                {{ object.shippingaddress.Address }}
+                            </td>
+                            <td class="column-3">
+                                پلاک
+                                {{ object.shippingaddress.HouseNumber }}
+                                واحد
+                                {{ object.shippingaddress.FloorNumber }}
+
+                            </td>
+                            <td class="column-4">
+                                کدپستی
+                                {{ object.shippingaddress.ZipCode }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

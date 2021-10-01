@@ -1,0 +1,58 @@
+{% extends 'ShopAccount/AdminBase.html' %}
+
+{% block Body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Quick Example</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="post" class="rtl" novalidate>
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label" for="{{ Form.IsSecondHand.id_for_label }}">
+                                    {{ Form.IsSecondHand.label }}
+                                </label>
+                                {{ Form.IsSecondHand }}
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="{{ Form.SecondHandRate.id_for_label }}">{{ Form.SecondHandRate.label }}</label>
+                            {{ Form.SecondHandRate }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form.BriefDescription.label_tag }}
+                            {{ Form.BriefDescription }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form.Price.label_tag }}
+                            {{ Form.Price }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form.Number.label_tag }}
+                            {{ Form.Number }}
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label" for="{{ Form.SellOnline.id_for_label }}">
+                                    {{ Form.SellOnline.label }}
+                                </label>
+                                {{ Form.SellOnline }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">اضافه کردن زیر محصول</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

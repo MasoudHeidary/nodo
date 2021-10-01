@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include 'Root/__base__css__.html' %}
+    {% block Head %}{% endblock %}
+
+</head>
+<body {% block BodyParam %}{% endblock %}>
+{% include 'Root/NavBar.html' %}
+
+{% block Body %}{% endblock %}
+
+{% include 'Root/Footer.html' %}
+{% include 'Root/__base__script__.html' %}
+{% block Script %}{% endblock %}
+</body>
+</html>

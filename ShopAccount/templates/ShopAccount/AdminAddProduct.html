@@ -1,0 +1,66 @@
+{% extends 'ShopAccount/AdminBase.html' %}
+
+{% block Body %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-orange">
+                <div class="card-header">
+                    <h3 class="card-title">اضافه کردن محصول</h3>
+                    <h6 class="rtl">
+                        <br>
+                        درخواست اضافه کردن محصول یعنی در حال حاضر این محصول در فروشگاه وجود ندارد و این یک محصول جدید
+                        است
+                        <br>
+                        بعد از ارسال درخواست چند دقیقه طول میکشد تا تیم ما توضیحات و عکس مناسب برای محصول را تهیه کرده و
+                        روی سایت قرار دهند
+                        <br>
+                        پس نگران تاخیر نباشید
+                    </h6>
+                </div>
+                <form method="post" class="rtl" novalidate>
+                    {% csrf_token %}
+                    {{ Form.non_field_errors }}
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="form-check">
+                                {{ Form.Publisher.label_tag }}
+                                {{ Form.Publisher }}
+                                {{ Form.Publisher.errors }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ Form.Name.label_tag }}
+                            {{ Form.Name }}
+                            {{ Form.Name.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form.Writer.label_tag }}
+                            {{ Form.Writer }}
+                            {{ Form.Writer.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form.Translator.label_tag }}
+                            {{ Form.Translator }}
+                            {{ Form.Translator.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form.Description.label_tag }}
+                            {{ Form.Description }}
+                            {{ Form.Description.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form.Barcode.label_tag }}
+                            {{ Form.Barcode }}
+                            {{ Form.Barcode.errors }}
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn bg-orange text-white">ارسال درخواست اضافه کردن محصول</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
